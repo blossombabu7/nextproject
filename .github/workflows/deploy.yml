@@ -24,8 +24,10 @@ jobs:
 
       - name: Pull Docker image from AWS ECR
         run: |
+          whoami
           docker images
           docker ps -a
+          
 
       - name: Run Docker container
         run: |
