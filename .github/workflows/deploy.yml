@@ -1,11 +1,10 @@
-runs-on: self-hosted
 on: workflow_dispatch
 
 name: Deploy to EC2
 
 jobs:
   deploy:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
 
     steps:
       - name: Checkout code
