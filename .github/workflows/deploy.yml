@@ -25,7 +25,7 @@ jobs:
       - name: push Docker image to ecr
         run: |
           docker build -t 533267220020.dkr.ecr.us-east-1.amazonaws.com/next_demo .
-          docker tag test:latest 533267220020.dkr.ecr.us-east-1.amazonaws.com/next_demo:latest
+          docker tag 840ad3b9506b 533267220020.dkr.ecr.us-east-1.amazonaws.com/next_demo:latest
           aws ecr get-login-password --region ${{ vars.AWS_REGION }} | docker login --username AWS --password-stdin ${{ vars.AWS_ACCOUNT_ID }}.dkr.ecr.${{ vars.AWS_REGION }}.amazonaws.com
           docker push 533267220020.dkr.ecr.us-east-1.amazonaws.com/next_demo:latest
  
