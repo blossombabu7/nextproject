@@ -18,16 +18,14 @@ jobs:
 
       - name: Configure AWS credentials
         run: |
-          echo "list aws credentails"
-          echo ${{ vars.AWS_ACCESS_KEY_ID }}
           aws configure set aws_access_key_id ${{ vars.AWS_ACCESS_KEY_ID }}
           aws configure set aws_secret_access_key ${{ vars.AWS_SECRET_ACCESS_KEY }}
           aws configure set default.region ${{ vars.AWS_REGION }}
 
       - name: Pull Docker image from AWS ECR
         run: |
-          aws ecr get-login-password --region ${{ secrets.AWS_REGION }} | docker login --username AWS --password-stdin ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com
-          docker pull ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/next_demo:latest
+          docker images
+          docker ps -a
 
       - name: Run Docker container
         run: |
