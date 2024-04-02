@@ -28,6 +28,10 @@ jobs:
           docker tag 840ad3b9506b 533267220020.dkr.ecr.us-east-1.amazonaws.com/next_demo:latest
           aws ecr get-login-password --region ${{ vars.AWS_REGION }} | docker login --username AWS --password-stdin ${{ vars.AWS_ACCOUNT_ID }}.dkr.ecr.${{ vars.AWS_REGION }}.amazonaws.com
           docker push 533267220020.dkr.ecr.us-east-1.amazonaws.com/next_demo:latest
+      - name: Pull Docker image from AWS ECR
+        run: |
+          aws ecr get-login-password --region ${{ vars.AWS_REGION }} | docker login --username AWS --password-stdin ${{ vars.AWS_ACCOUNT_ID }}.dkr.ecr.${{ vars.AWS_REGION }}.amazonaws.com
+          docker pull ${{ vars.AWS_ACCOUNT_ID }}.dkr.ecr.${{ vars.AWS_REGION }}.amazonaws.com/next_demo:latest
  
 
       - name: Run Docker container
