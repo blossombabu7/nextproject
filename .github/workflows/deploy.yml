@@ -24,6 +24,8 @@ jobs:
 
       - name: push Docker image to ecr
         run: |
+          docker build -t 533267220020.dkr.ecr.us-east-1.amazonaws.com/next_demo .
+
           aws ecr get-login-password --region ${{ vars.AWS_REGION }} | docker login --username AWS --password-stdin ${{ vars.AWS_ACCOUNT_ID }}.dkr.ecr.${{ vars.AWS_REGION }}.amazonaws.com
           
 
