@@ -25,11 +25,12 @@ jobs:
       - name: push Docker image to ecr
         run: |
           docker build -t 533267220020.dkr.ecr.us-east-1.amazonaws.com/next_demo .
-
+          docker tag next_demo:latest 533267220020.dkr.ecr.us-east-1.amazonaws.com/next_demo:latest
           aws ecr get-login-password --region ${{ vars.AWS_REGION }} | docker login --username AWS --password-stdin ${{ vars.AWS_ACCOUNT_ID }}.dkr.ecr.${{ vars.AWS_REGION }}.amazonaws.com
-          
+          docker push 533267220020.dkr.ecr.us-east-1.amazonaws.com/next_demo:latest
+ 
 
       - name: Run Docker container
         run: |
-          docker run -d -p 3000:3000 ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/next_demo:latest
+          docker run -d -p 3000:3000 ${{ vars.AWS_ACCOUNT_ID }}.dkr.ecr.${{ vars.AWS_REGION }}.amazonaws.com/next_demo:latest
           
